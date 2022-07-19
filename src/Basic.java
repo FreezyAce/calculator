@@ -62,6 +62,10 @@ public class Basic {
 
 
         if (index == 2) {
+            if(res < 0){
+                System.out.println("Error!!!");
+                System.exit(0);
+            }
             System.out.println(convert(res));
         }
         else if (index == 0) {
@@ -123,10 +127,8 @@ public class Basic {
         String convertTens = ivanСollector( number%10, "X", "L", "C");
         number /=10;
         String convertHundreds = ivanСollector(number%10, "C", "D", "M");
-        number /=10;
-        String convertThousands = ivanСollector(number%10, "M", "", "");
 
-        String result = convertThousands + convertHundreds + convertTens + convertOnes;
+        String result = convertHundreds + convertTens + convertOnes;
         return result;
 
     }
