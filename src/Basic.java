@@ -2,22 +2,37 @@ import java.util.Scanner;
 
 public class Basic {
     public static void main(String[] args) {
+
+        System.out.println("Введите 2  целых числа: ");
+        Scanner scanner = new Scanner(System.in);
+
+        String scan = scanner.nextLine();
+
+        System.out.println(calc(scan));
+    }
+    public static String calc(String input){
         String value1;
         String value2;
         int value3 = 0;
         int value4 = 0;
         int res = 0;
-        String operation = null;
+        String operation;
         String[] rome = {"X", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
         int[] arab = {10, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         byte index = 0;
+        String[] mass = input.split(" ");
 
-        System.out.println("Введите 2  целых числа: ");
-        Scanner scanner = new Scanner(System.in);
+        if(mass.length != 3){
+            return "Error";
+        }
 
-        value1 = scanner.next();
-        operation = scanner.next();
-        value2 = scanner.next();
+        value1 = mass[0];
+        operation = mass[1];
+        value2 = mass[2];
+
+        if(!(operation.equals("+") || operation.equals("-") || operation.equals("/") || operation.equals("*"))){
+            return "Error!!!";
+        }
 
         for (int i = 0; i < rome.length; i++) {
             if (value1.equals(rome[i])) {
@@ -38,41 +53,32 @@ public class Basic {
             value4 = new Integer(value2);
         }
 
-        if(value3 < 0 || value3 > 10 || value4 < 0 || value4 > 10 || index == 1){
-            System.out.println("Error!!!");
-            System.exit(0);
+        if (value3 <= 0 || value3 > 10 || value4 <= 0 || value4 > 10 || index == 1) {
+            return "Error!!!";
         }
-
 
         if (operation.equals("+")) {
             res = value3 + value4;
-
         }
         if (operation.equals("-")) {
             res = value3 - value4;
-
         }
         if (operation.equals("*")) {
             res = value3 * value4;
-
         }
         if (operation.equals("/")) {
             res = value3 / value4;
         }
-
-
         if (index == 2) {
-            if(res < 0){
-                System.out.println("Error!!!");
-                System.exit(0);
+            if (res <= 0) {
+                return "Error!!!";
             }
-            System.out.println(convert(res));
-        }
-        else if (index == 0) {
-            System.out.println(res);
-        }
-        else {
-            System.out.println("Error!!!");
+            return convert(res);
+        } else if (index == 0) {
+            String a = "" + res;
+            return a;
+        } else {
+            return "Error!!!";
         }
     }
     public static String ivanСollector(int n, String one, String five, String ten){
@@ -115,13 +121,11 @@ public class Basic {
             {
                 return one + ten;
             }
-
         }
         return "";
     }
 
     public static String convert(int number){
-
         String convertOnes = ivanСollector( number%10, "I", "V", "X");
         number /=10;
         String convertTens = ivanСollector( number%10, "X", "L", "C");
@@ -133,5 +137,3 @@ public class Basic {
 
     }
 }
-
-
